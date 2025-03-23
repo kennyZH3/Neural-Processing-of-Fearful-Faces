@@ -43,6 +43,3 @@ print("Regions with significant differences undet different conditions:\n", diff
 
 # Save the results to a CSV file
 results_df.to_csv("data/hypothesis_test_results.csv", index=False)
-
-# Save the long format data to a CSV file
-df_long.to_csv("data/long_data.csv", index=False)
