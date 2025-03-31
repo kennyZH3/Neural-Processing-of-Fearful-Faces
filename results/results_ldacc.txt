@@ -1,0 +1,33 @@
+                               Mixed Linear Model Regression Results
+===================================================================================================
+Model:                           MixedLM               Dependent Variable:               activation
+No. Observations:                390                   Method:                           REML      
+No. Groups:                      39                    Scale:                            77984.6442
+Min. group size:                 10                    Log-Likelihood:                   -2685.2026
+Max. group size:                 10                    Converged:                        Yes       
+Mean group size:                 10.0                                                              
+---------------------------------------------------------------------------------------------------
+                                                    Coef.   Std.Err.   z    P>|z|   [0.025   0.975]
+---------------------------------------------------------------------------------------------------
+Intercept                                           300.380  237.134  1.267 0.205  -164.395 765.155
+condition[T.high_fearful_vs_high_neutral]            -5.090  308.603 -0.016 0.987  -609.941 599.761
+condition[T.high_fearful_vs_low_fearful]           -176.728  308.603 -0.573 0.567  -781.579 428.122
+condition[T.high_neutral_vs_low_neutral]           -430.834  308.603 -1.396 0.163 -1035.685 174.017
+condition[T.high_vs_low_load]                      -289.538  308.603 -0.938 0.348  -894.389 315.313
+condition[T.highload_fearful]                        53.768  308.603  0.174 0.862  -551.083 658.619
+condition[T.highload_neutral]                      -228.712  308.603 -0.741 0.459  -833.563 376.138
+condition[T.low_fearful_vs_low_neutral]            -284.211  308.603 -0.921 0.357  -889.062 320.640
+condition[T.lowload_fearful]                        -74.231  308.603 -0.241 0.810  -679.081 530.620
+condition[T.lowload_neutral]                        -68.976  308.603 -0.224 0.823  -673.827 535.875
+anxiety                                              -7.917    6.217 -1.273 0.203   -20.102   4.268
+anxiety:condition[T.high_fearful_vs_high_neutral]     0.219    8.091  0.027 0.978   -15.639  16.076
+anxiety:condition[T.high_fearful_vs_low_fearful]      7.172    8.091  0.887 0.375    -8.685  23.030
+anxiety:condition[T.high_neutral_vs_low_neutral]     13.693    8.091  1.692 0.091    -2.165  29.551
+anxiety:condition[T.high_vs_low_load]                12.579    8.091  1.555 0.120    -3.279  28.436
+anxiety:condition[T.highload_fearful]                11.497    8.091  1.421 0.155    -4.361  27.354
+anxiety:condition[T.highload_neutral]                18.720    8.091  2.314 0.021     2.863  34.578
+anxiety:condition[T.low_fearful_vs_low_neutral]       7.476    8.091  0.924 0.355    -8.382  23.334
+anxiety:condition[T.lowload_fearful]                 12.414    8.091  1.534 0.125    -3.443  28.272
+anxiety:condition[T.lowload_neutral]                 12.329    8.091  1.524 0.128    -3.528  28.187
+Group Var                                         14108.527   19.225                               
+===================================================================================================
