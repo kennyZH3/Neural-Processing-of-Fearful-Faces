@@ -42,4 +42,4 @@ diff_regions = results_df[results_df['significant'] == True]
 print("Regions with significant differences undet different conditions:\n", diff_regions['condition'] + " " + diff_regions['region'])
 
 # Save the results to a CSV file
-results_df.to_csv("data/hypothesis_test_results.csv", index=False)
+results_df.to_csv("results/hypothesis_test_results.csv", index=False)
