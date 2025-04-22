@@ -35,7 +35,7 @@ pipelines = {
         StandardScaler(),
         LinearRegression()
     ),
-    "Ridge (α via inner CV)": make_pipeline(
+    "Ridge": make_pipeline(
         StandardScaler(),
         RidgeCV(alphas=np.logspace(-3, 3, 31), cv=5)
     ),
