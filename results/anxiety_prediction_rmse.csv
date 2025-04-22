@@ -1,0 +1,4 @@
+model,loo_rmse
+Ordinary Least Squares,12.900104010568404
+Ridge (α via inner CV),8.307625725087805
+LassoCV,8.021957401658065
