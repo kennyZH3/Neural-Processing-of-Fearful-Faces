@@ -3,6 +3,7 @@ from scipy.stats import ttest_ind
 
 df_long = pd.read_csv("data/long_data.csv")
 print(df_long.head())
+print(df_long['anxiety_binary'].value_counts())
 
 
 # Hypothesis testing: Compare activation levels between high and low anxiety groups for each condition and region
