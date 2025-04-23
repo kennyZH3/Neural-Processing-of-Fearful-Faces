@@ -13,7 +13,7 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 df = pd.read_csv(DATA_PATH)
 print(f"Loaded {len(df)} rows from {DATA_PATH}")
 
-# --- Prepare Leave‑One‑Subject‑Out splitter ---
+# --- Prepare Leave-One-Subject-Out splitter ---
 logo = LeaveOneGroupOut()
 
 # Will accumulate one dict per region
@@ -25,19 +25,22 @@ for region in df['region'].unique():
     df_region = df[df['region'] == region].copy()
     df_region['condition'] = df_region['condition'].astype('category')
     
+    # compute region-wide activation sd
+    activation_sd = df_region['activation'].std(ddof=1)
+    
     # --- 1) Fit full model and save summary ---
     full_mod   = smf.mixedlm("activation ~ anxiety * condition",
                              data=df_region,
                              groups=df_region["id"])
     full_res   = full_mod.fit(reml=False)
     
-    summary_txt = full_res.summary().as_text()
+    summary_txt  = full_res.summary().as_text()
     summary_path = os.path.join(RESULTS_DIR, f"model_summary_{region}.txt")
     with open(summary_path, "w") as f:
         f.write(summary_txt)
-    print(f"  • Full‑data summary saved to {summary_path}")
+    print(f"  • Full-data summary saved to {summary_path}")
     
-    # --- 2) Leave‑one‑subject‑out CV for RMSE ---
+    # --- 2) Leave-one-subject-out CV for RMSE ---
     fold_mses = []
     for train_idx, test_idx in logo.split(df_region, groups=df_region["id"]):
         train_df = df_region.iloc[train_idx]
@@ -50,14 +53,20 @@ for region in df['region'].unique():
         
         y_true = test_df["activation"].values
         y_pred = cv_res.predict(test_df).values
-        fold_mses.append(np.mean((y_true - y_pred) ** 2))
+        fold_mses.append(np.mean((y_true - y_pred)**2))
     
     rmse = np.sqrt(np.mean(fold_mses))
-    rmse_records.append({"region": region, "rmse": rmse})
-    print(f"  • LOPO CV RMSE = {rmse:.3f}\n")
+    
+    # record RMSE and activation SD
+    rmse_records.append({
+        "region":       region,
+        "rmse":         rmse,
+        "activation_sd": activation_sd
+    })
+    print(f"  • LOPO CV RMSE = {rmse:.3f}, activation SD = {activation_sd:.3f}\n")
 
-# --- Save combined RMSEs ---
+# --- Save combined RMSEs + SDs ---
 rmse_df = pd.DataFrame(rmse_records).sort_values("region")
 rmse_csv = os.path.join(RESULTS_DIR, "all_regions_rmse.csv")
 rmse_df.to_csv(rmse_csv, index=False)
-print(f"All regions RMSE saved to {rmse_csv}")
+print(f"All regions RMSE & SD saved to {rmse_csv}")
